@@ -38,7 +38,9 @@ module.exports = (robot) ->
       stream.stop();
 
     if filter.charAt(0) == "@"
-      stream = twit.stream("user")
+      stream = twit.stream("statuses/filter",
+        follow: filter.substring(1);
+      )
     else
       stream = twit.stream("statuses/filter",
         track: filter
@@ -48,6 +50,7 @@ module.exports = (robot) ->
 
     stream.on "tweet", (tweet) ->
       msg.send "https://twitter.com/#{tweet.user.screen_name}/status/#{tweet.id_str}"
+      msg.send "@#{tweet.user.screen_name}: #{tweet_text}"
     stream.on "disconnect", (disconnectMessage) ->
       msg.send "I've got disconnected from Twitter stream. Apparently the reason is: #{disconnectMessage}"
     stream.on "reconnect", (request, response, connectInterval) ->
