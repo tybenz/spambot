@@ -1,26 +1,5 @@
-# Description
-#   Filters out Twitter stream and displays tweets
-#
 # Dependencies:
 #   "twit": "1.1.6"
-#
-# Configuration:
-#   HUBOT_TWITTER_STREAM_CONSUMER_KEY
-#   HUBOT_TWITTER_STREAM_CONSUMER_SECRET
-#   HUBOT_TWITTER_STREAM_ACCESS_TOKEN
-#   HUBOT_TWITTER_ACCESS_TOKEN_SECRET
-#
-# Commands:
-#   hubot twitter stream <filter> - Connects to Twitter stream and filters tweets according to <filter> 
-#   hubot stop twitter stream - Disconnects from Twitter stream
-#
-# Notes:
-#   Only one stream can be active at the same time. The filter operates on the <track> parameter of
-#   Twitter statuses/filter endpoint. See https://dev.twitter.com/docs/api/1.1/post/statuses/filter
-#   for additional details.
-#
-# Author:
-#   matteoagosti
 
 Twit = require "twit"
 config = 
@@ -58,9 +37,14 @@ module.exports = (robot) ->
     if stream
       stream.stop();
 
-    stream = twit.stream("statuses/filter",
-      track: filter
-    )
+    if filter.charAt(0) == "@"
+      stream = twit.stream("statuses/filter",
+        follow: filter.substring(1);
+      )
+    else
+      stream = twit.stream("statuses/filter",
+        track: filter
+      )
 
     msg.send "Thank you, I'll filter out Twitter stream as requested: #{filter}"
 
