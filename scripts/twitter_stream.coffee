@@ -38,9 +38,7 @@ module.exports = (robot) ->
       stream.stop();
 
     if filter.charAt(0) == "@"
-      stream = twit.stream("statuses/filter",
-        follow: filter.substring(1);
-      )
+      stream = twit.stream("user")
     else
       stream = twit.stream("statuses/filter",
         track: filter
