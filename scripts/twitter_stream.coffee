@@ -2,6 +2,7 @@
 #   "twit": "1.1.6"
 
 Twit = require "twit"
+_ = require 'underscore'
 config = 
   consumer_key: process.env.HUBOT_TWITTER_STREAM_CONSUMER_KEY
   consumer_secret: process.env.HUBOT_TWITTER_STREAM_CONSUMER_SECRET
@@ -50,6 +51,13 @@ module.exports = (robot) ->
 
     stream.on "tweet", (tweet) ->
       msg.send "https://twitter.com/#{tweet.user.screen_name}/status/#{tweet.id_str}"
+      tweet_text = _.unescape(tweet.text)
+      if tweet.entities.urls?
+        for url in tweet.entities.urls
+          tweet_text = tweet_text.replace(url.url, url.expanded_url)
+      if tweet.entities.media?
+        for media in tweet.entities.media
+          tweet_text = tweet_text.replace(media.url, media.media_url)
       msg.send "@#{tweet.user.screen_name}: #{tweet_text}"
     stream.on "disconnect", (disconnectMessage) ->
       msg.send "I've got disconnected from Twitter stream. Apparently the reason is: #{disconnectMessage}"
