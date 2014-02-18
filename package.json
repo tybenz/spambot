@@ -1,0 +1,36 @@
+{
+  "name": "probot",
+  "version": "2.3.2",
+  "author": "GitHub Inc.",
+  "keywords": "github hubot campfire bot",
+  "description": "A simple helpful Robot for your Company",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/github/hubot/raw/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/github/hubot.git"
+  },
+  "dependencies": {
+    "hubot": "~2.3.2",
+    "hubot-scripts": "~2.1.0",
+    "optparse": "1.0.3",
+    "hubot-irc": "~0.1.4",
+    "githubot": ">=0.1.5",
+    "underscore": "1.4.3",
+    "bang": "1.0.3",
+    "shellwords": "0.1.0",
+    "handlebars": "1.0.7",
+    "strftime": "0.5.0",
+    "string": "1.2.1",
+    "ntwitter": "0.2.10",
+    "underscore": "1.5.1"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  }
+}
