@@ -23,12 +23,11 @@
 #   matteoagosti
 
 Twit = require "twit"
-config = {
+config = 
   consumer_key: process.env.HUBOT_TWITTER_STREAM_CONSUMER_KEY
   consumer_secret: process.env.HUBOT_TWITTER_STREAM_CONSUMER_SECRET
   access_token: process.env.HUBOT_TWITTER_STREAM_ACCESS_TOKEN
   access_token_secret: process.env.HUBOT_TWITTER_ACCESS_TOKEN_SECRET
-}
 
 module.exports = (robot) ->
   twit = undefined
@@ -59,11 +58,6 @@ module.exports = (robot) ->
     if stream
       stream.stop();
 
-    # if filter.charAt(0) == "@"
-    #   stream = twit.stream("statuses/filter",
-    #     follow: filter.substring(1);
-    #   )
-    # else
     stream = twit.stream("statuses/filter",
       track: filter
     )
