@@ -1,5 +1,5 @@
 {
-  "name": "probot",
+  "name": "spambot",
   "version": "2.3.2",
   "author": "GitHub Inc.",
   "keywords": "github hubot campfire bot",
@@ -28,7 +28,7 @@
     "string": "1.2.1",
     "ntwitter": "0.2.10",
     "underscore": "1.5.1",
-    "twit": "latest"
+    "twit": "1.1.6"
   },
   "engines": {
     "node": "0.10.x",

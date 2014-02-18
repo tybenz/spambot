@@ -58,14 +58,14 @@ module.exports = (robot) ->
     if stream
       stream.stop();
 
-    if filter.charAt(0) == "@"
-      stream = twit.stream("statuses/filter",
-        follow: filter.substring(1);
-      )
-    else
-      stream = twit.stream("statuses/filter",
-        track: filter
-      )
+    # if filter.charAt(0) == "@"
+    #   stream = twit.stream("statuses/filter",
+    #     follow: filter.substring(1);
+    #   )
+    # else
+    stream = twit.stream("statuses/filter",
+      track: filter
+    )
 
     msg.send "Thank you, I'll filter out Twitter stream as requested: #{filter}"
 
