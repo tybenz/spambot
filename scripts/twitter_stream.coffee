@@ -94,6 +94,7 @@ module.exports = (robot) ->
       msg.send "I'll reconnect to Twitter stream in #{connectInterval}ms"
   
   robot.respond /stop twitter stream/i, (msg) ->
+    robot.brain.data.twitterStream = null
     if stream
       stream.stop()
     msg.send "Ok, I'm now disconnected from Twitter stream"
