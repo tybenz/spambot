@@ -1,9 +1,9 @@
 # interval to keep bot awake
 
 noop = () ->
-  return
+  console.log "Trying to stay awake"
 
-setInterval noop, 2000
+setInterval noop, 5 * 60 * 1000
 
 module.exports = (robot) ->
   return
