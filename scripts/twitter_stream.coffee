@@ -43,7 +43,7 @@ module.exports = (robot) ->
       stream.on "disconnect", (disconnectMessage) ->
         robot.messageRoom allRooms, "I've got disconnected from Twitter stream. Apparently the reason is: #{disconnectMessage}"
       stream.on "reconnect", (request, response, connectInterval) ->
-        robot.messageRoom allRooms, "I'll reconnect to Twitter stream in #{connectInterval}ms"
+        console.log "I'll reconnect to Twitter stream in #{connectInterval}ms"
 
   robot.respond /twitter stream (.*)/i, (msg) ->
     unless config.consumer_key
@@ -95,7 +95,7 @@ module.exports = (robot) ->
     stream.on "disconnect", (disconnectMessage) ->
       msg.send "I've got disconnected from Twitter stream. Apparently the reason is: #{disconnectMessage}"
     stream.on "reconnect", (request, response, connectInterval) ->
-      msg.send "I'll reconnect to Twitter stream in #{connectInterval}ms"
+      console.log "I'll reconnect to Twitter stream in #{connectInterval}ms"
   
   robot.respond /stop twitter stream/i, (msg) ->
     robot.brain.data.twitterStream = null
