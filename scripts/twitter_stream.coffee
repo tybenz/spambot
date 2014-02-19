@@ -24,7 +24,11 @@ module.exports = (robot) ->
 
     if streamSettings
       twit = new Twit config
-      stream = twit.stream("statuses/filter", streamSettings)
+
+      if streamSettings.track
+        stream = twit.stream("statuses/filter", streamSettings)
+      else
+        stream = twit.stream("user", streamSettings)
 
       stream.on "tweet", (tweet) ->
         robot.messageRoom allRooms, "https://twitter.com/#{tweet.user.screen_name}/status/#{tweet.id_str}"
@@ -66,15 +70,15 @@ module.exports = (robot) ->
     if stream
       stream.stop()
 
-    if !robot.brain.data.twitterStream
-      settings = {}
-      if filter.charAt(0) == "@"
-        settings.follow = filter.substring(1)
-      else
-        settings.track = filter
-      robot.brain.data.twitterStream = settings
+    settings = {}
+    if filter.charAt(0) == "@"
+      settings.with = "user"
+      stream = twit.stream("user", settings)
+    else
+      settings.track = filter
+      stream = twit.stream("statuses/filter", settings)
+    robot.brain.data.twitterStream = settings
 
-    stream = twit.stream("statuses/filter", settings)
 
     msg.send "Thank you, I'll filter out Twitter stream as requested: #{filter}"
 
