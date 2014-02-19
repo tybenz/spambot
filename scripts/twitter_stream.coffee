@@ -13,8 +13,8 @@ module.exports = (robot) ->
   twit = undefined
   stream = undefined
 
-  if process.env.HUBOT_WALKIE_ROOMS
-    allRooms = process.env.HUBOT_WALKIE_ROOMS.split(',')
+  if process.env.HUBOT_IRC_ROOMS
+    allRooms = process.env.HUBOT_IRC_ROOMS.split(',')
   else
     allRooms = []
 
